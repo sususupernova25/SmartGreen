@@ -21,7 +21,8 @@ Student project, APEC PetroTechnic.
 
 ## Deliverables & Documentation
 
-- 📖 **Team Guide & Memo (Week 1 & 2):** [TEAM_GUIDE.md](TEAM_GUIDE.md) &middot; *Памятка для команды*
+- 📄 **Google Docs — Памятка для команды:** [SmartGreen Google Doc](https://docs.google.com/document/d/1EP-5aU9Sq6obncd25uNDSw6udTVA61RSjYy-1nX6b7w/edit)
+- 📖 **Team Guide & Memo (Week 1 & 2):** [TEAM_GUIDE.md](TEAM_GUIDE.md) &middot; *Памятка в репозитории*
 - 📄 **Week 1 Project Charter (PDF, 2 pages):** [SmartGreen_Project_Charter.pdf](week%201/SmartGreen_Project_Charter.pdf) &middot; *([Word version](week%201/SmartGreen_Project_Charter.docx))*
 - 📐 **Week 2 Architecture Diagram & Data Structure:** [SmartGreen_Diagram_Data_Stack.pdf](week%202/SmartGreen_Diagram_Data_Stack.pdf)
 - 📋 **Week 2 Design & Architecture Guide:** [week 2/README.md](week%202/README.md)
