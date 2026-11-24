@@ -10,12 +10,21 @@ Student project, APEC PetroTechnic.
 
 ## Team and roles
 
-| Member | Role |
-|---|---|
-| Diana | UI/UX design, Figma, documentation |
-| Raikhan | Login, settings, Firebase Authentication |
-| Assylai | Dashboard, device control, data layer |
-| Moldir | Automation rules, alerts, history charts |
+| Member | GitHub | Role |
+|---|---|---|
+| Diana | [@diakitchq](https://github.com/diakitchq) | UI/UX design, Figma, documentation |
+| Raikhan | [@rsakhtashevaa09](https://github.com/rsakhtashevaa09) | Login, settings, Firebase Authentication |
+| Assylai | [@aamirzhanova24-hub](https://github.com/aamirzhanova24-hub) | Dashboard, device control, data layer |
+| Moldir | [@sususupernova25](https://github.com/sususupernova25) | Automation rules, alerts, history charts |
+
+---
+
+## Deliverables & Documentation
+
+- 📄 **Week 1 Project Charter (PDF, 2 pages):** [SmartGreen_Project_Charter.pdf](week%201/SmartGreen_Project_Charter.pdf) &middot; *([Word version](week%201/SmartGreen_Project_Charter.docx))*
+- 📐 **Week 2 Architecture Diagram & Data Structure:** [SmartGreen_Diagram_Data_Stack.pdf](week%202/SmartGreen_Diagram_Data_Stack.pdf)
+- 🎨 **Clickable Prototype (Figma):** [SmartGreen Figma Prototype](https://www.figma.com/design/0GuGTdQvUozgvVNpJR3uuv/SmartGreen?node-id=0-1&t=WiQwT5ehBCJ7gfUw-1)
+- 🎨 **Style Guide (Logo, Colors, Fonts):** [SmartGreen Style Guide](https://www.figma.com/design/0GuGTdQvUozgvVNpJR3uuv/SmartGreen?node-id=34-792&t=WiQwT5ehBCJ7gfUw-1)
 
 ---
 
@@ -53,14 +62,12 @@ Student project, APEC PetroTechnic.
 - **Design:** Figma
 - **Version control:** Git and GitHub
 
-## Design
+## Design & Architecture
 
 - **Clickable prototype:** [SmartGreen Figma Prototype](https://www.figma.com/design/0GuGTdQvUozgvVNpJR3uuv/SmartGreen?node-id=0-1&t=WiQwT5ehBCJ7gfUw-1)
 - **Style guide (logo, colors, fonts):** [SmartGreen Style Guide](https://www.figma.com/design/0GuGTdQvUozgvVNpJR3uuv/SmartGreen?node-id=34-792&t=WiQwT5ehBCJ7gfUw-1)
 - **Screens:** Login, Home, My plants, Plant detail, Control (Manual / Automatic), Insights, History, Alerts, Alert detail, Water management, Energy management, AI Plant Health, More, Full Settings, No connection
-- **Diagram and data structure:** `SmartGreen_Diagram_Data_Stack.pdf`
-
-## Architecture
+- **Diagram and data structure:** [SmartGreen_Diagram_Data_Stack.pdf](week%202/SmartGreen_Diagram_Data_Stack.pdf)
 
 ```text
 Screens (Flutter)  ->  Data layer (repositories/services)  ->  Firebase
@@ -116,9 +123,9 @@ To test alerts and automation, change values (for example temperature to 45 °C 
 
 | Week | Goal | Status |
 |---|---|---|
-| 1 | Idea and team, project charter, repository | Done |
-| 2 | Figma prototype, logo and colors, app diagram | Done |
-| 3 | App skeleton and database with test data | In progress |
+| 1 | Idea and team, project charter, repository | Done (Ready for defense) |
+| 2 | Figma prototype, logo and colors, app diagram | In progress |
+| 3 | App skeleton and database with test data | Planned |
 | 4 | Login, dashboard, device control (M1–M3) | Planned |
 | 5 | Automation, alerts, history, settings, no-internet mode (M4–M8) | Planned |
 | 6 | Extra feature, APK, demo video, final defense | Planned |
