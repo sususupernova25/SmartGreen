@@ -25,6 +25,8 @@ Student project, APEC PetroTechnic.
 - 📄 **Week 1 Project Charter (PDF, 2 pages):** [SmartGreen_Project_Charter.pdf](week%201/SmartGreen_Project_Charter.pdf) &middot; *([Word version](week%201/SmartGreen_Project_Charter.docx))*
 - 📐 **Week 2 Architecture Diagram & Data Structure:** [SmartGreen_Diagram_Data_Stack.pdf](week%202/SmartGreen_Diagram_Data_Stack.pdf)
 - 📋 **Week 2 Design & Architecture Guide:** [week 2/README.md](https://github.com/sususupernova25/SmartGreen/blob/main/week%202/README2.md)
+- 📱 **Week 3 App Skeleton & Data Deliverable (PDF):** [SmartGreen_Week3_App_Skeleton_and_Data.pdf](week%203/SmartGreen_Week3_App_Skeleton_and_Data.pdf)
+- 📋 **Week 3 Defense Guide & Architecture Report:** [week 3/README.md](week%203/README.md)
 - 🎨 **Clickable Prototype (Figma):** [SmartGreen Figma Prototype](https://www.figma.com/design/cvlv7QEPyrq8k96gOdL6Df/SmartGreen-House-DRAM?node-id=0-1&t=jOlUz4dlhIxxs6nY-1)
 - 🎨 **Style Guide (Logo, Colors, Fonts):** [SmartGreen Style Guide](https://www.figma.com/design/cvlv7QEPyrq8k96gOdL6Df/SmartGreen-House-DRAM?node-id=3-6093&t=IPj4AVZUxytpV34P-4) · [Logo](https://www.figma.com/design/cvlv7QEPyrq8k96gOdL6Df/SmartGreen-House-DRAM?node-id=3-6235&t=IPj4AVZUxytpV34P-4)
 
