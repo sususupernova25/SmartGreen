@@ -112,7 +112,11 @@ Security rule: each user can read and write only the greenhouse where `ownerId` 
    flutter pub get
    ```
 4. Add your own Firebase config (`google-services.json`) to `android/app/`. **Do not commit keys or passwords to GitHub.**
-5. Run the app:
+5. Populate Cloud Firestore with 7-day test data (including 45°C alert anomaly):
+   ```bash
+   python scripts/seed_firestore.py
+   ```
+6. Run the app:
    ```bash
    flutter run
    ```
@@ -126,8 +130,8 @@ To test alerts and automation, change values (for example temperature to 45 °C 
 | Week | Goal | Status |
 |---|---|---|
 | 1 | Idea and team, project charter, repository | Done (Defended) |
-| 2 | Figma prototype, logo and colors, app diagram | Done (Ready for defense) |
-| 3 | App skeleton and database with test data | Planned |
+| 2 | Figma prototype, logo and colors, app diagram | Done (Defended) |
+| 3 | App skeleton and database with test data | Done (Ready for defense) |
 | 4 | Login, dashboard, device control (M1–M3) | Planned |
 | 5 | Automation, alerts, history, settings, no-internet mode (M4–M8) | Planned |
 | 6 | Extra feature, APK, demo video, final defense | Planned |
