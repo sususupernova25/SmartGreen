@@ -44,7 +44,16 @@ class _ControlScreenState extends State<ControlScreen> {
               children: [
                 Expanded(
                   child: GestureDetector(
-                    onTap: () => setState(() => _isAutoMode = false),
+                    onTap: () {
+                      setState(() => _isAutoMode = false);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Switched to Manual Override: all devices controlled by you'),
+                          duration: Duration(seconds: 2),
+                          backgroundColor: AppColors.warningText,
+                        ),
+                      );
+                    },
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       decoration: BoxDecoration(
@@ -67,7 +76,16 @@ class _ControlScreenState extends State<ControlScreen> {
                 ),
                 Expanded(
                   child: GestureDetector(
-                    onTap: () => setState(() => _isAutoMode = true),
+                    onTap: () {
+                      setState(() => _isAutoMode = true);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Switched to Automatic Mode: automated sensor rules active'),
+                          duration: Duration(seconds: 2),
+                          backgroundColor: AppColors.primaryGreen,
+                        ),
+                      );
+                    },
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       decoration: BoxDecoration(
@@ -136,13 +154,25 @@ class _ControlScreenState extends State<ControlScreen> {
 
           const SizedBox(height: 24),
 
-          const Text(
-            'Actuators & Devices',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: AppColors.textDark,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Actuators & Devices',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textDark,
+                ),
+              ),
+              Text(
+                'Real-time Firestore',
+                style: TextStyle(
+                  fontSize: 11,
+                  color: AppColors.textMuted.withOpacity(0.8),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 12),
 
@@ -180,6 +210,33 @@ class _ControlScreenState extends State<ControlScreen> {
               );
             },
           ),
+
+          const SizedBox(height: 24),
+
+          // Quick manual batch action
+          ElevatedButton.icon(
+            onPressed: () {
+              _service.toggleDevice('irrigation', true);
+              _service.toggleDevice('ventilation', true);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('⚡ Emergency Cooling & Irrigation initiated!'),
+                  backgroundColor: AppColors.primaryGreen,
+                ),
+              );
+            },
+            icon: const Icon(Icons.flash_on, color: Colors.white),
+            label: const Text(
+              'Cooling Boost: Open Vents & Run Pump',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.textDark,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+          ),
         ],
       ),
     );
@@ -202,7 +259,16 @@ class _ControlScreenState extends State<ControlScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.black12),
+        border: Border.all(
+          color: device.state ? AppColors.primaryGreen.withOpacity(0.4) : Colors.black12,
+        ),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 2,
+            offset: Offset(0, 1),
+          ),
+        ],
       ),
       child: Row(
         children: [
@@ -223,9 +289,29 @@ class _ControlScreenState extends State<ControlScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                Row(
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                    ),
+                    const SizedBox(width: 8),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: device.state ? AppColors.softGreen : Colors.black.withOpacity(0.06),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        device.state ? 'ON' : 'OFF',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: device.state ? AppColors.primaryGreen : AppColors.textMuted,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 Text(
                   subtitle,
@@ -239,6 +325,14 @@ class _ControlScreenState extends State<ControlScreen> {
             activeColor: AppColors.primaryGreen,
             onChanged: (val) {
               _service.toggleDevice(id, val);
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('$title is now ${val ? "ON" : "OFF"}'),
+                  duration: const Duration(seconds: 1),
+                  backgroundColor: val ? AppColors.primaryGreen : Colors.grey[700],
+                ),
+              );
             },
           ),
         ],

@@ -13,9 +13,17 @@ import 'screens/settings_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+        apiKey: "AIzaSyA5BiPM775r8cax4rLKrM-2GgKS2V6C_4U",
+        appId: "1:1037978361253:web:ab62e7aee42081b0795c4c",
+        messagingSenderId: "1037978361253",
+        projectId: "smartgreen-b9cbe",
+        storageBucket: "smartgreen-b9cbe.firebasestorage.app",
+      ),
+    );
   } catch (e) {
-    debugPrint('Firebase initialization note: $e');
+    debugPrint('Firebase initialization note (using local cache if offline): $e');
   }
   runApp(const SmartGreenApp());
 }
@@ -66,18 +74,27 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
     );
   }
 
+  void _openSettings() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const SettingsScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> screens = [
       HomeScreen(
         onOpenAlerts: _openAlerts,
         onOpenControl: () => _switchTab(2),
+        onOpenHistory: () => _switchTab(4),
+        onOpenInsights: () => _switchTab(3),
+        onOpenSettings: _openSettings,
       ),
       const PlantsScreen(),
       const ControlScreen(),
       const InsightsScreen(),
       const HistoryScreen(),
-      const SettingsScreen(),
     ];
 
     return Scaffold(
@@ -86,7 +103,7 @@ class _MainNavigationShellState extends State<MainNavigationShell> {
         children: screens,
       ),
       bottomNavigationBar: NavigationBar(
-        selectedIndex: _currentIndex > 4 ? 4 : _currentIndex,
+        selectedIndex: _currentIndex,
         onDestinationSelected: (idx) {
           setState(() {
             _currentIndex = idx;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/greenhouse_service.dart';
 import '../theme/app_colors.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -9,6 +10,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  final GreenhouseService _service = GreenhouseService();
   double _maxTemp = 30.0;
   double _minSoilMoisture = 35.0;
   bool _isCelsius = true;
@@ -81,7 +83,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Max Temperature Alarm', style: TextStyle(fontWeight: FontWeight.w600)),
-                    Text('${_maxTemp.toInt()} °C', style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.primaryGreen)),
+                    Text('${_maxTemp.toInt()} ${_isCelsius ? "°C" : "°F"}',
+                        style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.primaryGreen)),
                   ],
                 ),
                 Slider(
@@ -97,42 +100,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text('Min Soil Moisture (Auto-water)', style: TextStyle(fontWeight: FontWeight.w600)),
-                    Text('${_minSoilMoisture.toInt()} %', style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.primaryGreen)),
+                    Text('${_minSoilMoisture.toInt()} %',
+                        style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.primaryGreen)),
                   ],
                 ),
                 Slider(
                   value: _minSoilMoisture,
-                  min: 10,
+                  min: 15,
                   max: 60,
-                  divisions: 10,
+                  divisions: 45,
                   activeColor: AppColors.primaryGreen,
                   onChanged: (val) => setState(() => _minSoilMoisture = val),
                 ),
-              ],
-            ),
-          ),
-
-          const SizedBox(height: 16),
-
-          // Units switch
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: Colors.black12),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('Temperature Unit', style: TextStyle(fontWeight: FontWeight.w600)),
+                const Divider(),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(_isCelsius ? '°C (Celsius)' : '°F (Fahrenheit)', style: const TextStyle(color: AppColors.textMuted)),
-                    Switch(
-                      value: _isCelsius,
-                      activeColor: AppColors.primaryGreen,
-                      onChanged: (val) => setState(() => _isCelsius = val),
+                    const Text('Temperature Units', style: TextStyle(fontWeight: FontWeight.w600)),
+                    Row(
+                      children: [
+                        Text(_isCelsius ? 'Celsius (°C)' : 'Fahrenheit (°F)',
+                            style: const TextStyle(color: AppColors.textMuted, fontSize: 13)),
+                        const SizedBox(width: 8),
+                        Switch(
+                          value: _isCelsius,
+                          activeColor: AppColors.primaryGreen,
+                          onChanged: (val) => setState(() => _isCelsius = val),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -142,23 +137,43 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
           const SizedBox(height: 24),
 
-          // Save settings button
-          ElevatedButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Settings saved to Firestore! Automation updated.'),
+          // Save button
+          ElevatedButton.icon(
+            onPressed: () async {
+              final messenger = ScaffoldMessenger.of(context);
+              await _service.saveSettings(
+                maxTemp: _maxTemp,
+                minSoilMoisture: _minSoilMoisture,
+                isCelsius: _isCelsius,
+              );
+              messenger.showSnackBar(
+                SnackBar(
+                  content: Text(
+                    '✅ Settings saved! Max Temp: ${_maxTemp.toInt()}°C, Min Moisture: ${_minSoilMoisture.toInt()}%',
+                  ),
                   backgroundColor: AppColors.primaryGreen,
+                  duration: const Duration(seconds: 2),
                 ),
               );
             },
+            icon: const Icon(Icons.check, color: Colors.white),
+            label: const Text('Save Configuration', style: TextStyle(fontWeight: FontWeight.bold)),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primaryGreen,
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
-            child: const Text('Save Settings', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+          ),
+
+          const SizedBox(height: 16),
+
+          // Cloud sync status
+          Center(
+            child: Text(
+              'Connected to Firestore · smartgreen-b9cbe',
+              style: TextStyle(fontSize: 11, color: AppColors.textMuted.withOpacity(0.8)),
+            ),
           ),
         ],
       ),
