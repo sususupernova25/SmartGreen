@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'theme/app_colors.dart';
 import 'screens/home_screen.dart';
@@ -37,7 +36,7 @@ class SmartGreenApp extends StatelessWidget {
           primary: AppColors.primaryGreen,
           surface: AppColors.creamBackground,
         ),
-        textTheme: GoogleFonts.dmSansTextTheme(Theme.of(context).textTheme),
+        fontFamily: 'DM Sans',
       ),
       home: const MainNavigationShell(),
     );
